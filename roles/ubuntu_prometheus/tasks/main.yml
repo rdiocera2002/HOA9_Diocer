@@ -1,0 +1,43 @@
+---
+- name: Install Additional / Update Current packages needed for Prometheus
+  apt:
+    name:
+      - nginx
+      - wget
+      - python3-jmespath
+    state: latest
+
+- name: Directory for Prometheus Extraction
+  file:
+    path: ~/prometheus
+    state: directory
+
+- name: Download Prometheus for Ubuntu
+  unarchive:
+    src: https://github.com/prometheus/prometheus/releases/download/v2.43.0/prometheus-2.43.0.linux-amd64.tar.gz
+    dest: ~/prometheus
+    remote_src: yes
+    mode: 0777
+    owner: root
+    group: root
+
+- name: Executable Files for Prometheus
+  shell: |
+    cd ~/prometheus/prometheus-*
+    cp -r . /usr/local/bin/prometheus
+
+- name: Import Additional files for Prometheus
+  copy:
+    src: prometheus.service
+    dest: /etc/systemd/system
+    mode: 777
+    owner: root
+    group: root
+
+- name: Verification of the Installation of Prometheus in Ubuntu
+  service:
+    name: prometheus
+    state: restarted
+    enabled: true
+
+
