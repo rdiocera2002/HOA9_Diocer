@@ -12,9 +12,9 @@
     path: ~/prometheus
     state: directory
 
-- name: Download Prometheus for Ubuntu
+- name: Download Prometheus for CentOS
   unarchive:
-    src: https://github.com/prometheus/prometheus/releases/download/v2.43.0/prometheus-2.43.0.linux-amd64.tar.gz
+    src: https://github.com/prometheus/prometheus/releases/download/v2.27.1/prometheus-2.27.1.linux-amd64.tar.gz
     dest: ~/prometheus
     remote_src: yes
     mode: 0777
@@ -23,7 +23,7 @@
 
 - name: Executable Files for Prometheus
   shell: |
-    cd ~/prometheus/prometheus-*
+    cd ~/prometheus/prometheus*
     cp -r . /usr/local/bin/prometheus
 
 - name: Import Additional files for Prometheus

@@ -26,3 +26,4 @@
   become: true
   roles:
     - centos_prometheus
+

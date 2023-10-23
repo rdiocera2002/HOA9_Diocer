@@ -23,7 +23,7 @@
 
 - name: Executable Files for Prometheus
   shell: |
-    cd ~/prometheus/prometheus-*
+    cd ~/prometheus/prometheus*
     cp -r . /usr/local/bin/prometheus
 
 - name: Import Additional files for Prometheus
